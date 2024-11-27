@@ -26,3 +26,24 @@ Analysis of Mental Health Trends: Investigate correlations between age, gender, 
 Study Performance vs. Mental Health: Explore how CGPA relates to reported mental health conditions.
 Treatment Patterns: Understand how many students seek specialist treatment and factors influencing this.
 Gender-based or Course-based Analysis: Examine how mental health issues vary across genders or academic fields.
+
+
+
+Percentage of Students Seeking Treatment Who Have Depression
+students_with_depression = data[data["Do you have Depression?"] == "Yes"]
+treatment_percentage = (
+    students_with_depression[students_with_depression["Did you seek any specialist for a treatment?"] == "Yes"]
+    .shape[0]
+    / students_with_depression.shape[0]
+) * 100
+
+print(f"Percentage of students with depression seeking treatment: {treatment_percentage:.2f}%")
+
+ Mental Health Issues by Year of Study
+ issues_by_year = data[
+    (data["Do you have Depression?"] == "Yes") |
+    (data["Do you have Anxiety?"] == "Yes") |
+    (data["Do you have Panic attack?"] == "Yes")
+].groupby("Your current year of Study").size()
+
+print(issues_by_year)
